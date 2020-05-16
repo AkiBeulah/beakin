@@ -38,6 +38,7 @@ body {
   position: relative;
   background: rgb(255, 255, 255);
   font-family: 'source-sans';
+  z-index: -2;
 }
 
 ::-webkit-scrollbar {
@@ -510,7 +511,7 @@ a:hover {
 
 .port {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -739,7 +740,7 @@ a:hover {
   top: 0;
   left: 0;
   background: rgba(76, 76, 76, 0.4);
-  z-index: -5;
+  z-index: -10;
   display: flex;
   flex-direction: column;
   align-items: center;
