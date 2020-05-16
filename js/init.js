@@ -11,7 +11,7 @@ var init = function () {
       portInfo = document.querySelector(".port-info"),
       portClose = document.getElementById("port-cancel");
 
-   $.getJSON("./projects.json", function (json) {
+   $.getJSON("https://api.jsonbin.io/b/5ec044d88284f36af7bc424f", function (json) {
       for (let i = 0; i < json.projects.length; i++) {
          let portEntry = document.createElement("div"),
             portTextHeader = document.createElement("div"),
