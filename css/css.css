@@ -290,7 +290,7 @@ a:hover {
   min-height: 100vh;
   max-height: 100vh;
   justify-content: center;
-  background: url("../img.jpg") center/cover fixed no-repeat;
+  background: url("https://i.ibb.co/2ssr6Dg/img.jpg") center/cover fixed no-repeat;
 }
 
 .pane-2 {

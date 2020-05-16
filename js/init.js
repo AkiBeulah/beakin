@@ -4,7 +4,8 @@ var init = function () {
       times = document.querySelector(".times"),
       linksMenu = document.querySelector(".menu");
    var radios = document.getElementsByName('filter');
-   var projects = document.getElementsByClassName('port-entry');
+   var projects = document.getElementsByClassName('port-entry'),
+      projectDisplay = document.querySelector(".port-group");
    var value;
 
    bars.addEventListener("click", function () {
@@ -31,6 +32,7 @@ var init = function () {
                for (var i = 0, length = projects.length; i < length; i++) {
                   projects[i].style.display = "flex";
                }
+               projectDisplay.textContent = "ALL"
                break;
 
             case '2':
@@ -45,6 +47,8 @@ var init = function () {
                      }
                   }
                }
+
+               projectDisplay.textContent = "FRONTEND"
                break;
 
             case '3':
@@ -61,6 +65,12 @@ var init = function () {
                      }
                   }
                }
+
+               projectDisplay.textContent = "BACKEND"
+               break;
+            
+            case '4':
+               projectDisplay.textContent = "OTHER"
                break;
          }
       });
