@@ -18,7 +18,7 @@ var init = function () {
     contactBtn1 = document.querySelector(".btn-6-1"),
     contactBtn2 = document.querySelector(".btn-6-2"),
     temp = 0;
-    form = document.forms["theForm"];
+  form = document.forms["theForm"];
   // var webL = document.querySelector(".web-l"),
   // jobL = document.querySelector(".job-l"),
   // web = document.querySelector("#web"),
@@ -40,11 +40,145 @@ var init = function () {
   //   webL.classList.remove("shake");
   //  });
 
-  // document.addEventListener("keyup", checkContactForm());
+  canvas = document.getElementsByTagName('canvas')[0];
+  canvas.height = canvas.parentElement.offsetHeight;
+  canvas.width = canvas.parentElement.offsetWidth;
+
+  var ctx = canvas.getContext('2d');
+
+  var characterList1 = ['website?', 'employer?', 'click next', 'what are you looking for?', 'what are you looking for?'];
+  var characterList2 = ['name', 'what should I call you?'];
+  var characterList3 = ['email', 'lemme send you something'];
+  var characterList4 = ['phone number', 'can I get your number?', 'let/`s text'];
+  var characterList5 = ['message', 'leave a message', 'say `hi` at least'];
+  var characterList = characterList1;
+
+  var layers = {
+    n: 5,
+    letters: [20, 10, 10, 5, 5],
+    coef: [0.1, 0.2, 0.4, 0.6, 0.8],
+    size: [16, 22, 36, 40, 46],
+    color: ['#f13a018b', '#eeeee8b', '#cccccc8b', '#bbbbbb8b', '#aaaaaa8b'],
+    font: 'Courier'
+  };
+
+  var characters = [];
+  var mouseX = document.body.clientWidth / 2;
+  var mouseY = document.body.clientHeight / 2;
+
+  var rnd = {
+    btwn: function (min, max) {
+      return Math.floor(Math.random() * (max - min) + min);
+    },
+    choose: function (list) {
+      return list[rnd.btwn(0, list.length)];
+    }
+  };
+
+  /*LETTER DRAWING*/
+  function drawLetter(char) {
+    ctx.font = char.size + 'px ' + char.font;
+    ctx.fillStyle = char.color;
+
+    var x = char.posX + (mouseX - canvas.width / 5) * char.coef * -1;
+    var y = char.posY + (mouseY - canvas.height / 5) * char.coef * -1;
+
+    ctx.fillText(char.char, x, y);
+  }
+
+  /*ANIMATION*/
+  document.onmousemove = function (ev) {
+    mouseX = (ev.pageX - canvas.offsetLeft) / 20;
+    mouseY = (ev.pageY - canvas.offsetTop) / 20;
+
+    if (window.requestAnimationFrame) {
+      requestAnimationFrame(update);
+    } else {
+      update();
+    }
+  };
+
+  function update() {
+    clear();
+    render();
+  }
+
+  var updateCanvas = function () {
+    let j = 0;
+    for (let i = 0; i < navDots.length; i++) {
+      if (navDots[i].classList.contains("active-nav-dot")) {
+        j = i;
+        break;
+      }
+    }
+    switch (j) {
+      case 0:
+        characterList = characterList1;
+        break;
+      case 1:
+        characterList = characterList2;
+        break;
+      case 2:
+        characterList = characterList3;
+        break;
+      case 3:
+        characterList = characterList4;
+        break;
+      case 4:
+        characterList = characterList5;
+        break;
+    }
+
+    createLetters();
+    update();
+  }
+
+  function clear() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function render() {
+    for (let i = 0; i < characters.length; i++) {
+      drawLetter(characters[i]);
+    }
+  }
+
+  /*INITIALIZE*/
+
+  function createLetters() {
+    for (let i = 0; i < layers.n; i++) {
+      for (let j = 0; j < layers.letters[i]; j++) {
+
+        var character = rnd.choose(characterList);
+        var x = rnd.btwn(0, canvas.width);
+        var y = rnd.btwn(0, canvas.height);
+        
+        characters.push({
+          char: character,
+          font: layers.font,
+          size: layers.size[i],
+          color: layers.color[i],
+          layer: i,
+          coef: layers.coef[i],
+          posX: x,
+          posY: y
+        });
+      }
+    }
+  }
+
+  createLetters();
+  update();
+
+  /*REAJUST CANVAS AFTER RESIZE*/
+  window.onresize = function () {
+    location.reload();
+  };
 
   contactBtn1.addEventListener("click", function (event) {
     event.preventDefault();
     checkContactForm();
+    updateCanvas();
     temp++;
     if (navDots[navDots.length - 2].classList.contains("active-nav-dot")) {
       contactBtn1.style.opacity = "0";
@@ -66,6 +200,7 @@ var init = function () {
   contactBtn2.addEventListener("click", function (event) {
     event.preventDefault();
     checkContactForm();
+    updateCanvas();
     temp--;
     if (navDots[1].classList.contains("active-nav-dot")) {
       contactBtn2.style.opacity = "0";
@@ -86,7 +221,6 @@ var init = function () {
   });
 
   var checkContactForm = function () {
-    console.log(temp);
     if (form.elements[2].value == null || temp < 3 || form.elements[2].value == "" || form.elements[3].value == null || form.elements[3].value == "") {
       contactBtn.disabled = true;
     } else {
@@ -97,9 +231,10 @@ var init = function () {
 
   for (let i = 0; i < navDots.length; i++) {
     navDots[i].addEventListener("click", function () {
-      console.log(i);
-      (i == 0) ? contactBtn2.style.opacity = "0" : contactBtn2.style.opacity = 1;        
-      (i == 4) ? contactBtn1.style.opacity = "0" : contactBtn1.style.opacity = 1;        
+      checkContactForm();
+      updateCanvas();
+      (i == 0) ? contactBtn2.style.opacity = "0" : contactBtn2.style.opacity = 1;
+      (i == 4) ? contactBtn1.style.opacity = "0" : contactBtn1.style.opacity = 1;
       for (let j = 0; j < formBoxes.length; j++) {
         formBoxes[j].style.transform = `translateX(-${i}00%)`;
       }
@@ -109,7 +244,7 @@ var init = function () {
       navDots[i].classList.add("active-nav-dot");
     });
   }
-  
+
   $.getJSON("https://api.jsonbin.io/b/5ec053d847a2266b14799bb7", function (json) {
     for (let i = 0; i < json.projects.length; i++) {
       let portEntry = document.createElement("div"),
