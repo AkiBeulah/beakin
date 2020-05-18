@@ -1,1 +1,302 @@
-var headerPos = document.querySelector(".header").offsetTop, init = function () { var e, t = document.querySelector(".bars"), o = (document.querySelector(".times"), document.querySelector(".menu")), n = document.getElementsByName("filter"), r = document.getElementsByClassName("port-entry"), c = document.querySelector(".port-group"), l = document.querySelector(".port"), s = document.querySelector(".port-info"), i = document.getElementById("port-cancel"); document.querySelector(".port-info-arrow-left"), document.querySelector(".port-info-arrow-right"); $.getJSON("https://api.jsonbin.io/b/5ec053d847a2266b14799bb7", function (e) { for (let t = 0; t < e.projects.length; t++) { let o = document.createElement("div"), n = document.createElement("div"), r = document.createElement("img"), c = document.createElement("button"), s = document.createElement("div"), i = document.createElement("div"); s.className = "port-title", i.className = "port-tech", c.className = "port-button btn btn-4", c.id = `${t}`, r.className = "port-image", o.className = "port-entry", n.className = "port-text-header", l.appendChild(o), o.appendChild(n), o.appendChild(r), o.appendChild(c), n.appendChild(s), n.appendChild(i), r.src = e.projects[t].images[0], s.textContent = e.projects[t].title, i.textContent = e.projects[t].tech, c.textContent = "Learn More" } var t = document.querySelectorAll(".port-button"); for (let o = 0; o < t.length; o++)t[o].addEventListener("click", function () { let t = document.querySelector(".port-info-title"), n = document.querySelector(".port-info-subtitle"), r = document.querySelector(".port-visit"), c = document.querySelector(".port-info-desc"); for (let t = 0; t < e.projects[t].images.length; t++) { let n = document.createElement("img"), r = document.createElement("div"), c = document.querySelector(".port-info-carousel"); n.className = "port-car-image", n.src = e.projects[o].images[t], r.appendChild(n), c.appendChild(r) } $(".port-info-carousel").slick(), t.textContent = e.projects[o].title, n.textContent = e.projects[o].subtitle, c.textContent = e.projects[o].desc, r.href = e.projects[o].site, s.style.zIndex = 5, s.style.opacity = 1 }) }), i.addEventListener("click", function () { portInfoImage = document.querySelector(".port-info-carousel"), s.style.opacity = 0, setTimeout(function () { s.style.zIndex = -5 }, 400); for (let e = 0; e > portInfoImage.childElementCount; e++)setTimeout(function () { portInfoImage.removeChild(portInfoImage.children[e]) }, 500) }), t.addEventListener("click", function () { o.classList.contains("menu-translate") ? (o.classList.remove("menu-translate"), document.querySelector(".header").style.height = "100vh") : (o.classList.add("menu-translate"), document.querySelector(".header").style.height = "75px") }); for (let t = 0; t < n.length; t++)n[t].addEventListener("click", function () { for (let t = 0, o = n.length; t < o; t++)n[t].checked && (e = n[t].value); switch (e) { case "1": for (let e = 0, t = r.length; e < t; e++)r[e].style.display = "flex"; c.textContent = "ALL"; break; case "2": for (let e = 0, t = r.length; e < t; e++)r[e].querySelector(".port-tech") && (r[e].querySelector(".port-tech").textContent.includes("HTML") || r[e].querySelector(".port-tech").textContent.includes("CSS") || r[e].querySelector(".port-tech").textContent.includes("Vanilla JS") ? r[e].style.display = "flex" : r[e].style.display = "none"); c.textContent = "FRONTEND"; break; case "3": for (let e = 0, t = r.length; e < t; e++)r[e].querySelector(".port-tech") && (r[e].querySelector(".port-tech").textContent.includes("RUBY") || r[e].querySelector(".port-tech").textContent.includes("Ruby on Rails") || r[e].querySelector(".port-tech").textContent.includes("PHP") || r[e].querySelector(".port-tech").textContent.includes("React") || r[e].querySelector(".port-tech").textContent.includes("JSX") ? r[e].style.display = "flex" : r[e].style.display = "none"); c.textContent = "BACKEND"; break; case "4": c.textContent = "OTHER" } }) }, scrollFunction = function () { window.pageYOffset > 300 ? document.querySelector(".header").classList.add("stick") : document.querySelector(".header").classList.remove("stick") }; window.addEventListener("scroll", scrollFunction), window.addEventListener("load", init);
+var headerPos = document.querySelector(".header").offsetTop;
+var init = function () {
+  var bars = document.querySelector(".bars"),
+    linksMenu = document.querySelector(".menu"),
+    radios = document.getElementsByName('filter'),
+    projects = document.getElementsByClassName('port-entry'),
+    projectDisplay = document.querySelector(".port-group"),
+    value,
+    portfolio = document.querySelector(".port"),
+    portInfo = document.querySelector(".port-info"),
+    portClose = document.getElementById("port-cancel"),
+    bar1 = document.querySelector(".bar-1"),
+    bar2 = document.querySelector(".bar-2"),
+    bar3 = document.querySelector(".bar-3"),
+    navDots = document.querySelectorAll(".form-nav-dot"),
+    formBoxes = document.querySelectorAll(".form-box"),
+    contactBtn = document.getElementById("contactSub"),
+    contactBtn1 = document.querySelector(".btn-6-1"),
+    contactBtn2 = document.querySelector(".btn-6-2"),
+    temp = 0;
+    form = document.forms["theForm"];
+  // var webL = document.querySelector(".web-l"),
+  // jobL = document.querySelector(".job-l"),
+  // web = document.querySelector("#web"),
+  // job = document.querySelector("#job");
+
+  // webL.addEventListener("mouseover", function () {
+  //   if(job.checked) jobL.classList.add("shake");
+  //  });
+
+  //  webL.addEventListener("mouseout", function () {
+  //   jobL.classList.remove("shake");
+  //  });
+
+  //  jobL.addEventListener("mouseover", function () {
+  //   if(web.checked) webL.classList.add("shake");
+  //  });
+
+  //  jobL.addEventListener("mouseout", function () {
+  //   webL.classList.remove("shake");
+  //  });
+
+  // document.addEventListener("keyup", checkContactForm());
+
+  contactBtn1.addEventListener("click", function (event) {
+    event.preventDefault();
+    checkContactForm();
+    temp++;
+    if (navDots[navDots.length - 2].classList.contains("active-nav-dot")) {
+      contactBtn1.style.opacity = "0";
+      navDots[4].click();
+    } else {
+      contactBtn2.style.opacity = "1";
+      let i = 0;
+      for (let j = 0; j < navDots.length; j++) {
+        if (navDots[j].classList.contains("active-nav-dot")) {
+          i = j;
+        }
+      }
+      if (i != 4) {
+        navDots[i + 1].click();
+      }
+    }
+  });
+
+  contactBtn2.addEventListener("click", function (event) {
+    event.preventDefault();
+    checkContactForm();
+    temp--;
+    if (navDots[1].classList.contains("active-nav-dot")) {
+      contactBtn2.style.opacity = "0";
+      navDots[0].click();
+    } else {
+      contactBtn1.style.opacity = "1";
+      let i = 0;
+      for (let j = 0; j < navDots.length; j++) {
+        if (navDots[j].classList.contains("active-nav-dot")) {
+          i = j;
+        }
+      }
+      if (i != 0) {
+        navDots[i - 1].click();
+      }
+    }
+
+  });
+
+  var checkContactForm = function () {
+    console.log(temp);
+    if (form.elements[2].value == null || temp < 3 || form.elements[2].value == "" || form.elements[3].value == null || form.elements[3].value == "") {
+      contactBtn.disabled = true;
+    } else {
+      contactBtn.disabled = false;
+
+    }
+  }
+
+  for (let i = 0; i < navDots.length; i++) {
+    navDots[i].addEventListener("click", function () {
+      console.log(i);
+      (i == 0) ? contactBtn2.style.opacity = "0" : contactBtn2.style.opacity = 1;        
+      (i == 4) ? contactBtn1.style.opacity = "0" : contactBtn1.style.opacity = 1;        
+      for (let j = 0; j < formBoxes.length; j++) {
+        formBoxes[j].style.transform = `translateX(-${i}00%)`;
+      }
+      for (let j = 0; j < navDots.length; j++) {
+        navDots[j].classList.remove("active-nav-dot");
+      }
+      navDots[i].classList.add("active-nav-dot");
+    });
+  }
+  
+  $.getJSON("https://api.jsonbin.io/b/5ec053d847a2266b14799bb7", function (json) {
+    for (let i = 0; i < json.projects.length; i++) {
+      let portEntry = document.createElement("div"),
+        portTextHeader = document.createElement("div"),
+        portImage = document.createElement("img"),
+        portButton = document.createElement("button"),
+        portTitle = document.createElement("div"),
+        portTech = document.createElement("div");
+
+      portTitle.className = "port-title";
+      portTech.className = "port-tech";
+      portButton.className = "port-button btn btn-4"
+      portButton.id = `${i}`;
+      portImage.className = "port-image";
+      portEntry.className = "port-entry";
+      portTextHeader.className = "port-text-header";
+
+      portfolio.appendChild(portEntry);
+      portEntry.appendChild(portTextHeader);
+      portEntry.appendChild(portImage);
+      portEntry.appendChild(portButton);
+      portTextHeader.appendChild(portTitle);
+      portTextHeader.appendChild(portTech);
+
+      portImage.src = json.projects[i].images[0];
+      portTitle.textContent = json.projects[i].title;
+      portTech.textContent = json.projects[i].tech;
+      portButton.textContent = "Learn More";
+    }
+
+    var portButton = document.querySelectorAll(".port-button");
+
+    for (let i = 0; i < portButton.length; i++) {
+      portButton[i].addEventListener("click", function () {
+        let portInfoTitle = document.querySelector(".port-info-title"),
+          portInfoSubtitle = document.querySelector(".port-info-subtitle"),
+          portVisit = document.querySelector(".port-visit"),
+          portInfoDesc = document.querySelector(".port-info-desc");
+
+        for (let j = 0; j < json.projects[j].images.length; j++) {
+          let portImage = document.createElement("img"),
+            div = document.createElement("div"),
+            portInfoImage = document.querySelector(".port-info-carousel");
+
+          portImage.className = "port-car-image";
+          portImage.src = json.projects[i].images[j];
+
+
+          div.appendChild(portImage);
+          portInfoImage.appendChild(div);
+        }
+
+        $('.port-info-carousel').slick();
+
+        portInfoTitle.textContent = json.projects[i].title;
+        portInfoSubtitle.textContent = json.projects[i].subtitle;
+        portInfoDesc.textContent = json.projects[i].desc;
+        portVisit.href = json.projects[i].site;
+
+        portInfo.style.zIndex = 5;
+        portInfo.style.opacity = 1;
+      });
+    }
+    //    portVisit = document.querySelectorAll(".port-button");
+    //    for (let i = 0; i < portVisit.length; i++) {
+    //       portVisit[i].addEventListener("click", function () {
+    //          // window.location.replace(json.projects[i].site);
+    //          console.log(json.projects[i]);
+    //          console.log(i);
+    //       });
+    //    }
+  });
+
+  portClose.addEventListener("click", function () {
+    portInfoImage = document.querySelector(".port-info-carousel");
+
+    portInfo.style.opacity = 0;
+    setTimeout(function () {
+      portInfo.style.zIndex = -5
+    }, 400);
+
+    for (let k = 0; k > portInfoImage.childElementCount; k++) {
+      setTimeout(function () {
+        portInfoImage.removeChild(portInfoImage.children[k]);
+      }, 500);
+    }
+  });
+
+  bars.addEventListener("click", function () {
+    if (linksMenu.classList.contains("menu-translate")) {
+      linksMenu.classList.remove("menu-translate");
+      document.querySelector(".header").style.height = "100vh";
+      bar1.classList.add("bar-1-r");
+      bar2.classList.add("bar-2-r");
+      bar3.classList.add("bar-3-r");
+      setTimeout(function () {
+        bar1.classList.add("bar-1-re");
+        bar2.classList.add("bar-2-re");
+        bar3.classList.add("bar-3-re");
+        bar1.classList.remove("bar-1-r");
+        bar2.classList.remove("bar-2-r");
+        bar3.classList.remove("bar-3-r");
+      }, 1100);
+    } else {
+      linksMenu.classList.add("menu-translate");
+      document.querySelector(".header").style.height = "75px";
+      bar1.classList.remove("bar-1-rr");
+      bar2.classList.add("bar-2-rr");
+      bar3.classList.add("bar-3-rr");
+      setTimeout(function () {
+        bar1.classList.remove("bar-1-re");
+        bar2.classList.remove("bar-2-re");
+        bar3.classList.remove("bar-3-re");
+        bar1.classList.remove("bar-1-rr");
+        bar2.classList.remove("bar-2-rr");
+        bar3.classList.remove("bar-3-rr");
+      }, 1000);
+    }
+
+  });
+
+  for (let k = 0; k < radios.length; k++) {
+    radios[k].addEventListener("click", function () {
+      for (let i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+          value = radios[i].value;
+        }
+      }
+
+      switch (value) {
+        case '1':
+          for (let i = 0, length = projects.length; i < length; i++) {
+            projects[i].style.display = "flex";
+          }
+          projectDisplay.textContent = "ALL"
+          break;
+
+        case '2':
+          for (let i = 0, length = projects.length; i < length; i++) {
+            if (projects[i].querySelector(".port-tech")) {
+              if (!projects[i].querySelector(".port-tech").textContent.includes("HTML") &&
+                !projects[i].querySelector(".port-tech").textContent.includes("CSS") &&
+                !projects[i].querySelector(".port-tech").textContent.includes("Vanilla JS")) {
+                projects[i].style.display = "none"
+              } else {
+                projects[i].style.display = "flex"
+              }
+            }
+          }
+
+          projectDisplay.textContent = "FRONTEND"
+          break;
+
+        case '3':
+          for (let i = 0, length = projects.length; i < length; i++) {
+            if (projects[i].querySelector(".port-tech")) {
+              if (!projects[i].querySelector(".port-tech").textContent.includes("RUBY") &&
+                !projects[i].querySelector(".port-tech").textContent.includes("Ruby on Rails") &&
+                !projects[i].querySelector(".port-tech").textContent.includes("PHP") &&
+                !projects[i].querySelector(".port-tech").textContent.includes("React") &&
+                !projects[i].querySelector(".port-tech").textContent.includes("JSX")) {
+                projects[i].style.display = "none"
+              } else {
+                projects[i].style.display = "flex"
+              }
+            }
+          }
+
+          projectDisplay.textContent = "BACKEND"
+          break;
+
+        case '4':
+          projectDisplay.textContent = "OTHER"
+          break;
+      }
+    });
+  }
+
+}
+
+var scrollFunction = function () {
+  if (window.pageYOffset > 300) {
+    document.querySelector(".header").classList.add("stick");
+  } else {
+    document.querySelector(".header").classList.remove("stick");
+  }
+}
+
+window.addEventListener("scroll", scrollFunction);
+window.addEventListener("load", init)
