@@ -299,46 +299,48 @@ var init = function () {
 
     for (let i = 0; i < portButton.length; i++) {
       portButton[i].addEventListener("click", function () {
-        let portInfoTitle = document.querySelector(".port-info-title"),
-          portInfoSubtitle = document.querySelector(".port-info-subtitle"),
-          portVisit = document.querySelector(".port-visit"),
-          portInfoDesc = document.querySelector(".port-info-desc");
+      
+        window.location.href(json.projects[i].site);
+      //   {
+      //     let portInfoTitle = document.querySelector(".port-info-title"),
+      //   portInfoSubtitle = document.querySelector(".port-info-subtitle"),
+      //   portVisit = document.querySelector(".port-visit"),
+      //   portInfoDesc = document.querySelector(".port-info-desc");
 
-        for (let j = 0; j < json.projects[j].images.length; j++) {
-          let portImage = document.createElement("img"),
-            div = document.createElement("div"),
-            portInfoImage = document.querySelector(".port-info-carousel");
+      // for (let j = 0; j < json.projects[j].images.length; j++) {
+      //   let portImage = document.createElement("img"),
+      //     div = document.createElement("div"),
+      //     portInfoImage = document.querySelector(".port-info-carousel");
 
-          portImage.className = "port-car-image";
-          portImage.src = json.projects[i].images[j];
-
-
-          div.appendChild(portImage);
-          portInfoImage.appendChild(div);
-        }
+      //   portImage.className = "port-car-image";
+      //   portImage.src = json.projects[i].images[j];
 
 
-        portInfoTitle.textContent = json.projects[i].title;
-        portInfoSubtitle.textContent = json.projects[i].subtitle;
-        portInfoDesc.textContent = json.projects[i].desc;
-        portVisit.href = json.projects[i].site;
+      //   div.appendChild(portImage);
+      //   portInfoImage.appendChild(div);
+      // }
 
-        portInfo.style.zIndex = 5;
-        portInfo.style.opacity = 1;
 
-        $('.port-info-carousel').slick();
-        setTimeout(() => {
-          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-prev.slick-arrow").style.left = "25px";
-          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-next.slick-arrow").style.right = "25px";
-          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-prev.slick-arrow").style.zIndex = "1";
-          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-next.slick-arrow").style.zIndex = "1";
-        }, 1000);
+      // portInfoTitle.textContent = json.projects[i].title;
+      // portInfoSubtitle.textContent = json.projects[i].subtitle;
+      // portInfoDesc.textContent = json.projects[i].desc;
+      // portVisit.href = json.projects[i].site;
+
+      // portInfo.style.zIndex = 5;
+      // portInfo.style.opacity = 1;
+
+      // $('.port-info-carousel').slick();
+      // setTimeout(() => {
+      //   document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-prev.slick-arrow").style.left = "25px";
+      //   document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-next.slick-arrow").style.right = "25px";
+      //   document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-prev.slick-arrow").style.zIndex = "1";
+      //   document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-next.slick-arrow").style.zIndex = "1";
+      // }, 1000);}
       });
     }
     //    portVisit = document.querySelectorAll(".port-button");
     //    for (let i = 0; i < portVisit.length; i++) {
     //       portVisit[i].addEventListener("click", function () {
-    //          // window.location.replace(json.projects[i].site);
     //          console.log(json.projects[i]);
     //          console.log(i);
     //       });
