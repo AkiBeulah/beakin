@@ -40,6 +40,30 @@ var init = function () {
   //   webL.classList.remove("shake");
   //  });
 
+  var cubePlane = document.querySelectorAll(".cube-face"),
+    cubeZ = (document.querySelector(".cube").offsetHeight / 2),
+    button = document.querySelector("#btnStart");
+
+  cubePlane[1].style.width = `cubePlane[0].offsetWidthpx`;
+  cubePlane[0].style.transform = `rotateX(90deg) translateZ(${cubeZ}px)`;
+  cubePlane[1].style.transform = `rotateY(90deg) translateZ(${cubeZ}px)`;
+  cubePlane[2].style.transform = `rotateY(0deg) translateZ(${cubeZ}px)`;
+
+  button.addEventListener("click", function () {
+    document.querySelector("#body").classList.add("body-switch");
+    setTimeout(() => {
+
+    }, 2000);
+  });
+
+  function lEmploy() {
+    document.forms["theForm"].elements[1].click()
+  }
+
+  function lWeb() {
+    document.forms["theForm"].elements[0].click()
+  }
+
   canvas = document.getElementsByTagName('canvas')[0];
   canvas.height = canvas.parentElement.offsetHeight;
   canvas.width = canvas.parentElement.offsetWidth;
@@ -129,8 +153,8 @@ var init = function () {
         break;
     }
 
-    createLetters();
-    update();
+    // createLetters();
+    // update();
   }
 
   function clear() {
@@ -152,7 +176,7 @@ var init = function () {
         var character = rnd.choose(characterList);
         var x = rnd.btwn(0, canvas.width);
         var y = rnd.btwn(0, canvas.height);
-        
+
         characters.push({
           char: character,
           font: layers.font,
@@ -169,11 +193,6 @@ var init = function () {
 
   createLetters();
   update();
-
-  /*REAJUST CANVAS AFTER RESIZE*/
-  window.onresize = function () {
-    location.reload();
-  };
 
   contactBtn1.addEventListener("click", function (event) {
     event.preventDefault();
@@ -297,7 +316,11 @@ var init = function () {
           portInfoImage.appendChild(div);
         }
 
-        $('.port-info-carousel').slick();
+        // $('.port-info-carousel').slick();
+        // $('.slick-prev').style.left = "25px";
+        // $('.slick-next').style.right = "25px";
+        // $('.slick-prev').style.zIndex = "1";
+        // $('.slick-next').style.zIndex = "1";
 
         portInfoTitle.textContent = json.projects[i].title;
         portInfoSubtitle.textContent = json.projects[i].subtitle;
@@ -319,7 +342,7 @@ var init = function () {
   });
 
   portClose.addEventListener("click", function () {
-    portInfoImage = document.querySelector(".port-info-carousel");
+    let portInfoImage = document.querySelector(".c");
 
     portInfo.style.opacity = 0;
     setTimeout(function () {
@@ -350,7 +373,6 @@ var init = function () {
       }, 1100);
     } else {
       linksMenu.classList.add("menu-translate");
-      document.querySelector(".header").style.height = "75px";
       bar1.classList.remove("bar-1-rr");
       bar2.classList.add("bar-2-rr");
       bar3.classList.add("bar-3-rr");
@@ -426,12 +448,13 @@ var init = function () {
 }
 
 var scrollFunction = function () {
-  if (window.pageYOffset > 300) {
+  if ($(".container").scrollTop > 20) {
+    console.log(0);
     document.querySelector(".header").classList.add("stick");
   } else {
     document.querySelector(".header").classList.remove("stick");
   }
 }
 
-window.addEventListener("scroll", scrollFunction);
+document.querySelector(".container").addEventListener("scroll", scrollFunction);
 window.addEventListener("load", init)
