@@ -60,15 +60,21 @@ body {
 }
 
 .body-switch {
-  animation: cubeA 2s forwards;
+  animation: cubeA 4s forwards;
 }
 
 @keyframes cubeA {
   0% {
     transform: scale(1) rotate3d(1, 0, 0, -90deg);
   }
+  25% {
+    transform: scale(0.3) rotate3d(0, 0, 1, 75deg);
+  }
   50% {
-    transform: scale(0.5) rotate3d(1, 1, 0, -45deg);
+    transform: scale(0.5) rotate3d(-1, 1, 0, 55deg);
+  }
+  75% {
+    transform: scale(0.8) rotate3d(1, -1, 0, 65deg);
   }
   100% {
     transform: scale(1) rotate3d(1, 0, 0, 0deg);
@@ -147,10 +153,10 @@ a:hover {
 /* header */
 
 .header {
-  position: fixed;
+  position: unset;
   min-width: 100vw;
-  top: 0;
   min-height: 80px;
+  top: 0;
   left: 0;
   z-index: 3;
   -webkit-transition: background 0.4s ease, height 0.4s ease, -webkit-box-shadow 0.8s ease;
@@ -161,7 +167,8 @@ a:hover {
 }
 
 .stick {
-  background: var(--primary);
+  position: sticky;
+  background: var(--dark);
   -webkit-box-shadow: 0px 10px 15px 10px;
   box-shadow: 0px 10px 15px 10px;
 }
@@ -234,7 +241,7 @@ a:hover {
 }
 
 .logo:hover .bold {
-  color: var(--dark);
+  color: var(--light);
 }
 
 .header-right {
@@ -551,12 +558,20 @@ a:hover {
 /* container */
 
 .container {
+  position: relative;
   overflow-x: hidden;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  /* border-radius: 0 0 20px 20px; */
+}
+
+.cube-child {
+  position: relative;
+}
+
+.mixed {
+  border-radius: 0 0 20px 20px;
 }
 
 .inner-container {
@@ -781,10 +796,11 @@ a:hover {
   text-indent: 2rem;
   font-size: 2rem;
   color: #ccc;
+  transition: color .4s ease;
 }
 
 .welcome-subtitle:hover {
-  color: var(--dark);
+  color: var(--primary);
 }
 
 .i-am {
@@ -1078,9 +1094,10 @@ a:hover {
 /* footer */
 
 .footer {
-  position: fixed;
+  position: sticky;
   z-index: -1;
   right: 0;
+  bottom: 0;
   left: 0;
   text-transform: uppercase;
   -webkit-box-sizing: content-box;
@@ -1348,6 +1365,7 @@ a:hover {
 
 .contact-me {
   background: rgb(245, 245, 245);
+  border-radius: 0 0 20px 20px;
 }
 
 .contact-child {

@@ -112,8 +112,8 @@ var init = function () {
 
   /*ANIMATION*/
   document.onmousemove = function (ev) {
-    mouseX = (ev.pageX - canvas.offsetLeft) / 20;
-    mouseY = (ev.pageY - canvas.offsetTop) / 20;
+    mouseX = (ev.pageX - canvas.offsetLeft) / 15;
+    mouseY = (ev.pageY - canvas.offsetTop) / 15;
 
     if (window.requestAnimationFrame) {
       requestAnimationFrame(update);
@@ -153,8 +153,8 @@ var init = function () {
         break;
     }
 
-    // createLetters();
-    // update();
+    createLetters();
+    update();
   }
 
   function clear() {
@@ -359,7 +359,7 @@ var init = function () {
   bars.addEventListener("click", function () {
     if (linksMenu.classList.contains("menu-translate")) {
       linksMenu.classList.remove("menu-translate");
-      document.querySelector(".header").style.height = "100vh";
+      // document.querySelector(".header").style.height = "100vh";
       bar1.classList.add("bar-1-r");
       bar2.classList.add("bar-2-r");
       bar3.classList.add("bar-3-r");
@@ -448,8 +448,7 @@ var init = function () {
 }
 
 var scrollFunction = function () {
-  if ($(".container").scrollTop > 20) {
-    console.log(0);
+  if ($(".container").scrollTop() > 80) {
     document.querySelector(".header").classList.add("stick");
   } else {
     document.querySelector(".header").classList.remove("stick");
