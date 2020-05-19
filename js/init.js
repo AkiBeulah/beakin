@@ -19,26 +19,26 @@ var init = function () {
     contactBtn2 = document.querySelector(".btn-6-2"),
     temp = 0;
   form = document.forms["theForm"];
-  // var webL = document.querySelector(".web-l"),
-  // jobL = document.querySelector(".job-l"),
-  // web = document.querySelector("#web"),
-  // job = document.querySelector("#job");
+  var webL = document.querySelector(".web-l"),
+  jobL = document.querySelector(".job-l"),
+  web = document.querySelector("#web"),
+  job = document.querySelector("#job");
 
-  // webL.addEventListener("mouseover", function () {
-  //   if(job.checked) jobL.classList.add("shake");
-  //  });
+  webL.addEventListener("mouseover", function () {
+    if(job.checked) jobL.classList.add("shake");
+   });
 
-  //  webL.addEventListener("mouseout", function () {
-  //   jobL.classList.remove("shake");
-  //  });
+   webL.addEventListener("mouseout", function () {
+    jobL.classList.remove("shake");
+   });
 
-  //  jobL.addEventListener("mouseover", function () {
-  //   if(web.checked) webL.classList.add("shake");
-  //  });
+   jobL.addEventListener("mouseover", function () {
+    if(web.checked) webL.classList.add("shake");
+   });
 
-  //  jobL.addEventListener("mouseout", function () {
-  //   webL.classList.remove("shake");
-  //  });
+   jobL.addEventListener("mouseout", function () {
+    webL.classList.remove("shake");
+   });
 
   var cubePlane = document.querySelectorAll(".cube-face"),
     cubeZ = (document.querySelector(".cube").offsetHeight / 2),
@@ -64,7 +64,8 @@ var init = function () {
     document.forms["theForm"].elements[0].click()
   }
 
-  canvas = document.getElementsByTagName('canvas')[0];
+  {
+    canvas = document.getElementsByTagName('canvas')[0];
   canvas.height = canvas.parentElement.offsetHeight;
   canvas.width = canvas.parentElement.offsetWidth;
 
@@ -192,7 +193,8 @@ var init = function () {
   }
 
   createLetters();
-  update();
+    update();
+  }
 
   contactBtn1.addEventListener("click", function (event) {
     event.preventDefault();
@@ -300,7 +302,7 @@ var init = function () {
     for (let i = 0; i < portButton.length; i++) {
       portButton[i].addEventListener("click", function () {
       
-        window.location.href(json.projects[i].site);
+        window.open(json.projects[i].site);
       //   {
       //     let portInfoTitle = document.querySelector(".port-info-title"),
       //   portInfoSubtitle = document.querySelector(".port-info-subtitle"),
@@ -347,20 +349,20 @@ var init = function () {
     //    }
   });
 
-  portClose.addEventListener("click", function () {
-    let portInfoImage = document.querySelector(".c");
+  // portClose.addEventListener("click", function () {
+  //   let portInfoImage = document.querySelector(".c");
 
-    portInfo.style.opacity = 0;
-    setTimeout(function () {
-      portInfo.style.zIndex = -5
-    }, 400);
+  //   portInfo.style.opacity = 0;
+  //   setTimeout(function () {
+  //     portInfo.style.zIndex = -5
+  //   }, 400);
 
-    for (let k = 0; k > portInfoImage.childElementCount; k++) {
-      setTimeout(function () {
-        portInfoImage.removeChild(portInfoImage.children[k]);
-      }, 500);
-    }
-  });
+  //   for (let k = 0; k > portInfoImage.childElementCount; k++) {
+  //     setTimeout(function () {
+  //       portInfoImage.removeChild(portInfoImage.children[k]);
+  //     }, 500);
+  //   }
+  // });
 
   bars.addEventListener("click", function () {
     if (linksMenu.classList.contains("menu-translate")) {
