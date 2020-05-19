@@ -70,16 +70,16 @@ var init = function () {
 
   var ctx = canvas.getContext('2d');
 
-  var characterList1 = ['website?', 'employer?', 'click next', 'what are you looking for?', 'what are you looking for?'];
-  var characterList2 = ['name', 'what should I call you?'];
-  var characterList3 = ['email', 'lemme send you something'];
-  var characterList4 = ['phone number', 'can I get your number?', 'let/`s text'];
-  var characterList5 = ['message', 'leave a message', 'say `hi` at least'];
+  var characterList1 = ['website', 'employee', 'click next'];
+  var characterList2 = ['name'];
+  var characterList3 = ['email'];
+  var characterList4 = ['phone number'];
+  var characterList5 = ['leave a message', 'say `hi` at least'];
   var characterList = characterList1;
 
   var layers = {
     n: 5,
-    letters: [20, 10, 10, 5, 5],
+    letters: [10, 5, 8, 5, 5],
     coef: [0.1, 0.2, 0.4, 0.6, 0.8],
     size: [16, 22, 36, 40, 46],
     color: ['#f13a018b', '#eeeee8b', '#cccccc8b', '#bbbbbb8b', '#aaaaaa8b'],
@@ -127,14 +127,14 @@ var init = function () {
     render();
   }
 
-  var updateCanvas = function () {
+  var updateCanvas = function (o) {
     let j = 0;
     for (let i = 0; i < navDots.length; i++) {
       if (navDots[i].classList.contains("active-nav-dot")) {
         j = i;
-        break;
       }
     }
+    characters = [];
     switch (j) {
       case 0:
         characterList = characterList1;
@@ -197,7 +197,7 @@ var init = function () {
   contactBtn1.addEventListener("click", function (event) {
     event.preventDefault();
     checkContactForm();
-    updateCanvas();
+    updateCanvas(1);
     temp++;
     if (navDots[navDots.length - 2].classList.contains("active-nav-dot")) {
       contactBtn1.style.opacity = "0";
@@ -219,7 +219,7 @@ var init = function () {
   contactBtn2.addEventListener("click", function (event) {
     event.preventDefault();
     checkContactForm();
-    updateCanvas();
+    updateCanvas(-1);
     temp--;
     if (navDots[1].classList.contains("active-nav-dot")) {
       contactBtn2.style.opacity = "0";
@@ -259,6 +259,7 @@ var init = function () {
       }
       for (let j = 0; j < navDots.length; j++) {
         navDots[j].classList.remove("active-nav-dot");
+        (j > i) ? updateCanvas(-1) : updateCanvas(1);
       }
       navDots[i].classList.add("active-nav-dot");
     });
@@ -316,11 +317,6 @@ var init = function () {
           portInfoImage.appendChild(div);
         }
 
-        // $('.port-info-carousel').slick();
-        // $('.slick-prev').style.left = "25px";
-        // $('.slick-next').style.right = "25px";
-        // $('.slick-prev').style.zIndex = "1";
-        // $('.slick-next').style.zIndex = "1";
 
         portInfoTitle.textContent = json.projects[i].title;
         portInfoSubtitle.textContent = json.projects[i].subtitle;
@@ -329,6 +325,14 @@ var init = function () {
 
         portInfo.style.zIndex = 5;
         portInfo.style.opacity = 1;
+
+        $('.port-info-carousel').slick();
+        setTimeout(() => {
+          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-prev.slick-arrow").style.left = "25px";
+          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-next.slick-arrow").style.right = "25px";
+          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-prev.slick-arrow").style.zIndex = "1";
+          document.querySelector("#body > div > div.cube-face.cube__face--front.container > div > div.port-info > div > div.port-info-image > div > button.slick-next.slick-arrow").style.zIndex = "1";
+        }, 1000);
       });
     }
     //    portVisit = document.querySelectorAll(".port-button");
